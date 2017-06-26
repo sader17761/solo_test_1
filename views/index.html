@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sample Voice 1</title>
+    <script src="/vendors/angular.min.js" charset="utf-8"></script>
+    <script src="scripts/voiceController.js" charset="utf-8"></script>
+    <script src="scripts/services/voiceServices.js" charset="utf-8"></script>
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+    <link rel="stylesheet" href="/vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/styles.min.css">
+  </head>
+  <body ng-app="myApp" ng-controller="VoiceController as vc">
+    <h1>Sample Voice 1</h1>
+    <input type="text" ng-model="vc.inputIn" placeholder="Enter your word...">
+    <button ng-click="vc.getWord(vc.inputIn)">Search</button>
+    <div>
+      <p>Add a word to the list:</p>
+      <input type="text" ng-model="vc.addWordIn" placeholder="Add a word...">
+      <button ng-click="vc.addWord(vc.addWordIn)">Add Word</button>
+    </div>
+    <div>
+      <p ng-if="vc.wordsArrayLength >= 1">Word {{ vc.count + 1}} of {{ vc.wordsArrayLength }}</p>
+      <input type="text" ng-model="vc.wordIn" placeholder="Enter your word...">
+      <button ng-click="vc.readWord()">Word</button>
+      <button ng-click="vc.readDef()">Definition</button>
+      <button ng-click="vc.readSpeech()">Part of Speech</button>
+      <button ng-click="vc.checkSpelling(vc.wordIn)">Check Spelling</button>
+    </div>
+    <div>
+      <button ng-click="vc.nextWord()">Next Word</button>
+    </div>
+    <div>
+      <button ng-click="vc.searchBooks()">Search Books</button>
+    </div>
+    <div class="displayDiv">
+      <h2>Definitions:</h2>
+      <div ng-repeat="data in vc.data">
+        <p>This word is a: {{data.speech}}</p>
+        <p>The definition is: {{data.text}}</p>
+        <button ng-click="vc.readDef(data.text)">Definition</button>
+        <hr>
+      </div>
+    </div>
+  </body>
+</html>
